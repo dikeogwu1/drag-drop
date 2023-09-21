@@ -1,6 +1,6 @@
 import "../styles/search.css";
 import SearchIcon from "../components/svg/Search";
-import useDispatch from "../utils/useFetch";
+import useDispatch from "../utils/hooks/useFetch";
 import { useState } from "react";
 
 function Search({ items, setItems }) {

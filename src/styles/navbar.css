@@ -12,9 +12,15 @@
   font-weight: 700;
   line-height: 1.5rem;
 }
-.nav_actions button {
+.nav_actions button,
+.autheticated {
   width: fit-content;
   font-size: 1.25rem;
   padding: 0.5rem 1.25rem;
   border-radius: 5px;
+}
+.autheticated {
+  border-radius: 0;
+  background: var(--green-dark);
+  color: var(--primary-white);
 }

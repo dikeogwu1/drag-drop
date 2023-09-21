@@ -1,0 +1,36 @@
+/* form */
+.form {
+  width: 90vw;
+  max-width: var(--fixed-width);
+  background: var(--primary-white);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--shadow-1);
+  padding: 2rem 2.5rem;
+  margin: 3rem auto;
+  transition: var(--main-transition);
+}
+.form:hover {
+  box-shadow: var(--shadow-2);
+}
+.form_label {
+  display: block;
+  font-size: var(--smallText);
+  margin-bottom: 0.5rem;
+  text-transform: capitalize;
+  letter-spacing: var(--letterSpacing);
+}
+.form_input {
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--borderRadius);
+  background: var(--grey-50);
+  border: 1px solid var(--grey-200);
+  margin-bottom: 1rem;
+}
+.btn_block {
+  padding: 0.25rem 1rem;
+  border-radius: var(--borderRadius);
+}
+.form p {
+  margin-top: 1.5rem;
+}

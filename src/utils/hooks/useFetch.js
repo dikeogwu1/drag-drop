@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from "react";
 import axios from "axios";
-import reducer, { ACTIONS } from "./reducer";
+import reducer from "../reducers/fetchReducer";
+import { ACTIONS } from "../reducers/fetchReducer";
 
 const initialState = {
   loading: false,

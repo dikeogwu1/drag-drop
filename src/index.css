@@ -18,8 +18,10 @@
   --primary-pink: rgba(190, 18, 60, 0.1);
   --primary-grey: #d1d5db;
   --primary-red: #b91c1c;
+  --grey-50: #f0f4f8;
   --gray-500: #6b7280;
   /* secondary colors */
+  --grey-200: #bcccdc;
   --grey-900: #111827;
   --secondary-rose: hsl(345, 83%, 70%);
   --secondary-black: #333;
@@ -28,15 +30,27 @@
   --lighter-grey: #9ca3af;
   --lighter-black: #666;
   --lighter-rose: rgba(190, 18, 60, 0.1);
+  /* alert colos */
+  --red-light: #f8d7da;
+  --red-dark: #842029;
+  --green-light: #d1e7dd;
+  --green-dark: #0f5132;
   /* border radius */
-  --primary-radius: 0.25rem;
+  --borderRadius: 0.25rem;
   /* fonts */
   --primary-font: "DM Sans", sans-serif;
   --secondary-font: "Poppins", sans-serif;
+  --small-text: 0.875rem;
   /* transition */
   --main-transition: 0.3s all linear;
   /* shadow */
-  --main-shadow: 0 0 10px 5px var(--primary-rose);
+  --shadow-1: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-2: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  /* others */
+  --fixed-width: 500px;
+  --letterSpacing: 1px;
 }
 
 /* Set a base font size and family */
@@ -95,7 +109,9 @@ button:hover {
   background: var(--secondary-rose);
   box-shadow: var(--main-shadow);
 }
-
+button:disabled {
+  cursor: not-allowed;
+}
 /* Apply a subtle box shadow on hover */
 input[type="text"]:hover,
 :hover {
@@ -131,6 +147,27 @@ input[type="text"]:hover,
   display: grid;
   place-content: center;
 }
+
+/* alerts */
+.alert {
+  padding: 0.375rem 0.75rem;
+  margin-bottom: 1rem;
+  border-color: transparent;
+  border-radius: var(--borderRadius);
+  text-align: center;
+  letter-spacing: var(--letterSpacing);
+  text-transform: capitalize;
+}
+
+.alert-danger {
+  color: var(--red-dark);
+  background: var(--red-light);
+}
+.alert-success {
+  color: var(--green-dark);
+  background: var(--green-light);
+}
+
 /* Style a basic container */
 .container,
 .container-fluid {
