@@ -1,8 +1,23 @@
-# React + Vite
+# Image Gallery
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Full-stack image gallery app, hosted on Netlify. [Live demo](https://image-gallery-fabian.netlify.app/)
 
-Currently, two official plugins are available:
+### Backend Server
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+I created a custom Nodejs server to power this app, with server and its api doc is hosted on Render. [See api documentation](https://hngx-image-server.onrender.com)
+
+In order to run this app locally, follow the steps below.
+
+#### Install dependencies
+
+```
+npm install
+```
+
+#### start the dev server
+
+```
+npm run dev
+```
+
+### HNGx stage 3 task
