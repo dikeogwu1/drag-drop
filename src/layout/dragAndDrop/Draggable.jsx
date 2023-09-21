@@ -20,11 +20,15 @@ import { SortableItem } from "./SortableItem";
 import Search from "../../components/Search";
 import Loading from "../../components/Loading";
 import "../../styles/draggable.css";
+import useLogger from "../../utils/hooks/useLogger";
 
 function Draggable() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const { error: unauthorized, data: authorized } = useLogger(
+    "https://hngx-image-server.onrender.com/api/v1/drag"
+  );
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -33,6 +37,7 @@ function Draggable() {
     })
   );
 
+  // fetch images from the server
   const fetchData = async () => {
     setLoading(true);
     try {
@@ -51,6 +56,7 @@ function Draggable() {
     fetchData();
   }, []);
 
+  // loading state
   if (loading) {
     return (
       <main className='loading-centered'>
@@ -61,6 +67,7 @@ function Draggable() {
       </main>
     );
   }
+  // error state
   if (error) {
     return (
       <main className='wrapper'>
@@ -68,6 +75,7 @@ function Draggable() {
       </main>
     );
   }
+  // No search match
   if (items.length < 1) {
     return (
       <main className='loading-centered'>
@@ -78,7 +86,7 @@ function Draggable() {
       </main>
     );
   }
-
+  // Drag and drop
   return (
     <main className='loading-centered'>
       <Search items={items} setItems={setItems} />
@@ -98,16 +106,20 @@ function Draggable() {
     </main>
   );
 
+  // handle drag and drop event
   function handleDragEnd(event) {
     const { active, over } = event;
 
-    if (active.id !== over.id) {
+    if (active.id !== over.id && authorized.length > 0) {
+      console.log(authorized);
       setItems((items) => {
         const oldIndex = items.findIndex((item) => item._id === active.id);
         const newIndex = items.findIndex((item) => item._id === over.id);
 
         return arrayMove(items, oldIndex, newIndex);
       });
+    } else {
+      return alert("Login to access this feature");
     }
   }
 }
