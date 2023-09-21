@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { getUserFromLocalStorage } from "../../utils/localStorage";
 
 import {
   DndContext,
@@ -26,9 +29,7 @@ function Draggable() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const { error: unauthorized, data: authorized } = useLogger(
-    "https://hngx-image-server.onrender.com/api/v1/drag"
-  );
+  const [authorized, setAuthorized] = useState();
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -38,22 +39,40 @@ function Draggable() {
   );
 
   // fetch images from the server
-  const fetchData = async () => {
+  const fetchImage = async (url) => {
     setLoading(true);
     try {
-      const { data } = await axios.get(
-        "https://hngx-image-server.onrender.com/api/v1/image"
-      );
-      setLoading(false);
+      const { data } = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${getUserFromLocalStorage()}`,
+        },
+      });
       setItems(data.image);
+      setLoading(false);
     } catch (error) {
       setItems([]);
       setLoading(false);
       setError(true);
     }
   };
+  // check authorization for drag and drop
+  const fetchDrag = async (url) => {
+    setAuthorized(false);
+    try {
+      const { data } = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${getUserFromLocalStorage()}`,
+        },
+      });
+      setAuthorized(true);
+    } catch (error) {
+      setAuthorized(false);
+    }
+  };
+
   useEffect(() => {
-    fetchData();
+    fetchImage("https://hngx-image-server.onrender.com/api/v1/image");
+    fetchDrag("https://hngx-image-server.onrender.com/api/v1/drag");
   }, []);
 
   // loading state
@@ -89,6 +108,7 @@ function Draggable() {
   // Drag and drop
   return (
     <main className='loading-centered'>
+      <ToastContainer />
       <Search items={items} setItems={setItems} />
       <div className='draggable'>
         <DndContext
@@ -110,8 +130,7 @@ function Draggable() {
   function handleDragEnd(event) {
     const { active, over } = event;
 
-    if (active.id !== over.id && authorized.length > 0) {
-      console.log(authorized);
+    if (active.id !== over.id && authorized) {
       setItems((items) => {
         const oldIndex = items.findIndex((item) => item._id === active.id);
         const newIndex = items.findIndex((item) => item._id === over.id);
@@ -119,7 +138,7 @@ function Draggable() {
         return arrayMove(items, oldIndex, newIndex);
       });
     } else {
-      return alert("Login to access this feature");
+      return toast("Login to access this feature");
     }
   }
 }

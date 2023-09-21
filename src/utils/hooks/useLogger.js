@@ -10,7 +10,7 @@ const initialState = {
   error: null,
 };
 
-function useLogger(url) {
+function useLogger(url, reload) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const fetchData = async () => {
@@ -27,6 +27,7 @@ function useLogger(url) {
         type: ACTIONS.FETCH_DATA,
         payload: data,
       });
+      reload = false;
     } catch (error) {
       dispatch({ type: ACTIONS.ERROR, payload: error.message });
     }
@@ -34,7 +35,7 @@ function useLogger(url) {
 
   useEffect(() => {
     fetchData();
-  }, [url]);
+  }, [url, reload]);
 
   return state;
 }

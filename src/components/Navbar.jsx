@@ -1,11 +1,38 @@
 import "../styles/navbar.css";
 import { Link } from "react-router-dom";
-import useLogger from "../utils/hooks/useLogger";
+import axios from "axios";
+import { getUserFromLocalStorage } from "../utils/localStorage";
+import { useEffect, useState } from "react";
 
 function Navbar() {
-  const { loading, data, error } = useLogger(
-    "https://hngx-image-server.onrender.com/api/v1/auth/currentUser"
-  );
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  // fetch images from the server
+  const fetchData = async (url) => {
+    setLoading(true);
+
+    try {
+      const { data } = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${getUserFromLocalStorage()}`,
+        },
+      });
+
+      setLoading(false);
+      setData(data);
+    } catch (error) {
+      setData({});
+      setLoading(false);
+      setError(true);
+    }
+  };
+
+  useEffect(() => {
+    fetchData("https://hngx-image-server.onrender.com/api/v1/auth/currentUser");
+  }, []);
+
   // loading state
   if (loading) {
     return (
@@ -21,7 +48,7 @@ function Navbar() {
   }
 
   // error state
-  if (error || data.length < 1) {
+  if (error) {
     return (
       <nav className='nav'>
         <Link to='/' className='nav_link link'>

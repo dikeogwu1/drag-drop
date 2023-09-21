@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   transition: var(--main-transition);
+  margin-top: 1rem;
 }
 .nav_link strong {
   color: var(--primary-white);

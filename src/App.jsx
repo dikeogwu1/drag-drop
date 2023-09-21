@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Error from "./pages/Error";
 
@@ -32,7 +31,6 @@ function App() {
 function Root() {
   return (
     <div className='container'>
-      <Navbar />
       <Outlet />
       <Footer />
     </div>
