@@ -4,7 +4,7 @@ Full-stack image gallery app, hosted on Netlify. [Live demo](https://image-galle
 
 ### Backend Server
 
-I created a custom Nodejs server to power this app, with server and its api doc is hosted on Render. [See api documentation](https://hngx-image-server.onrender.com)
+ A custom Nodejs server was created to power this app, with the server and its api doc hosted on Render, for public use. [See api documentation](https://hngx-image-server.onrender.com)
 
 In order to run this app locally, follow the steps below.
 
