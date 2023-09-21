@@ -1,0 +1,20 @@
+.sortableItem {
+  box-shadow: 0px 0px 10px 1px var(--secondary-black);
+  position: relative;
+  display: grid;
+  place-content: center;
+}
+.sortableItem:hover {
+  cursor: grab;
+}
+
+.sortableItem h4 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: var(--secondary-rose);
+  min-width: 4rem;
+  padding: 0.25rem 0.5rem;
+  border-top-right-radius: 30px;
+  font-size: 0.75rem;
+}

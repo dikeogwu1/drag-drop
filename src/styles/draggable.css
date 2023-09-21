@@ -1,0 +1,16 @@
+.draggable {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+@media screen and (min-width: 600px) {
+  .draggable {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (min-width: 900px) {
+  .draggable {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

@@ -1,0 +1,20 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  transition: var(--main-transition);
+}
+.nav_link strong {
+  color: var(--primary-white);
+  font-family: var(--primary-font);
+  text-shadow: 1px 1px 5px var(--secondary-black);
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5rem;
+}
+.nav_actions button {
+  width: fit-content;
+  font-size: 1.25rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 5px;
+}
